@@ -1,9 +1,10 @@
 import React from "react";
 import "./App.css";
-import Chats from './Component/Chats/Chats'
+import ChatView from "./Component/ChatView/ChatView";
+import Chats from "./Component/Chats/Chats";
 import WebcamCapture from "./WebcamCapture";
-import Preview from "./Component/Preview/Preview"
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Preview from "./Component/Preview/Preview";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
@@ -11,7 +12,10 @@ function App() {
       <Router>
         <div className="app__body">
           <Switch>
-          <Route path="/chats">
+            <Route path="/chats/view">
+              <ChatView />
+            </Route>
+            <Route path="/chats">
               <Chats />
             </Route>
             <Route path="/preview">

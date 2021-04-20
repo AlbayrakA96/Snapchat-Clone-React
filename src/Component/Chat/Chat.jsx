@@ -1,17 +1,45 @@
-import React from 'react'
-import './Chat.css'
+import React from "react";
+import "./Chat.css";
+import StopRoundedIcon from "@material-ui/icons/StopRounded";
 import { Avatar } from "@material-ui/core";
+import ReactTimeago from "react-timeago";
+import { selectImage } from "../../features/appSlice";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { db } from "../../firebase";
 
-function Chat({id, username, timestamp, read, imageUrl, profilePic}) {
-    return (
-        <div className='chat'>
-            <Avatar src={profilePic} />
-            <div className="chat__info">
-                <h4>{username}</h4>
-                <p>Tap to view - {new Date(timestamp?.toDate()).toUTCString()}</p>
-            </div>
-        </div>
-    )
+
+
+function Chat({ id, username, timestamp, read, imageUrl, profilePic }) {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const open = () => {
+    if (!read) {
+      dispatch(selectImage(imageUrl));
+      db.collection("posts").doc(id).set(
+        {
+          read: true,
+        },
+        { merge: true }
+      );
+      history.push("/chats/view");
+    }
+  };
+
+  return (
+    <div onClick={open} className="chat">
+      <Avatar className="chat__avatar" src={profilePic} />
+      <div className="chat__info">
+        <h4>{username}</h4>
+        <p>
+          Tap to view - <ReactTimeago data={new Date(timestamp?.toDate()).toGMTString()} />
+        </p>
+      </div>
+      {!read && <StopRoundedIcon className="chat__readIcon" />}
+    </div>
+  );
 }
+console.log(Date);
 
-export default Chat
+export default Chat;
