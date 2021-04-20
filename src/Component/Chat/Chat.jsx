@@ -33,7 +33,7 @@ function Chat({ id, username, timestamp, read, imageUrl, profilePic }) {
       <div className="chat__info">
         <h4>{username}</h4>
         <p>
-          Tap to view - <ReactTimeago data={new Date(timestamp?.toDate()).toGMTString()} />
+          {!read && "Tap to view -"}{''} <ReactTimeago data={new Date(timestamp?.toDate()).toGMTString()} />
         </p>
       </div>
       {!read && <StopRoundedIcon className="chat__readIcon" />}
