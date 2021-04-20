@@ -29,17 +29,18 @@ function Chats() {
         )
       );
   }, []);
-  console.log(db.collection);
+  
 
   const takeSnap = () => {
     dispatch(resetCameraImage());
     history.push("/");
   };
-
+  console.log(user.profilepic);
   return (
     <div className="chats">
       <div className="chats__header">
-        <Avatar src={user.profilePic} onClick={() => auth.signOut()} className="chats__avatar" />
+        <Avatar src={user.profilepic} onClick={() => auth.signOut()} className="chats__avatar" />
+        
         <div className="chats__search">
           <SearchIcon className="chats__searchIcon" />
           <input placeholder="Friends" type="text" />

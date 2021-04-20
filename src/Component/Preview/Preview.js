@@ -50,6 +50,7 @@ function Preview() {
           .child(id)
           .getDownloadURL()
           .then((url) => {
+            console.log(url)
             db.collection("posts").add({
               imageUrl: url,
               username: "Abdus",
@@ -62,7 +63,7 @@ function Preview() {
       }
     );
   };
-
+  
   return (
     <div className="preview">
       <CloseIcon onClick={closePreview} className="preview__close" />
