@@ -8,8 +8,6 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { db } from "../../firebase";
 
-
-
 function Chat({ id, username, timestamp, read, imageUrl, profilePic }) {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -33,13 +31,14 @@ function Chat({ id, username, timestamp, read, imageUrl, profilePic }) {
       <div className="chat__info">
         <h4>{username}</h4>
         <p>
-          {!read && "Tap to view -"}{''} <ReactTimeago data={new Date(timestamp?.toDate()).toGMTString()} />
+          {!read && "Tap to view -"}
+          {""} {new Date(timestamp?.toDate()).toUTCString()} 
         </p>
       </div>
       {!read && <StopRoundedIcon className="chat__readIcon" />}
     </div>
   );
 }
-console.log(Date);
+console.log(ReactTimeago);
 
 export default Chat;

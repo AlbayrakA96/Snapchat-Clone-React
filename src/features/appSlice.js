@@ -1,4 +1,4 @@
-import {  createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 export const appSlice = createSlice({
   name: "app",
@@ -14,7 +14,7 @@ export const appSlice = createSlice({
       state.user = null;
     },
     selectImage: (state, action) => {
-        state.selectedImage = action.payload;
+      state.selectedImage = action.payload;
     },
     resetImage: (state) => {
       state.selectedImage = null;
@@ -22,8 +22,7 @@ export const appSlice = createSlice({
   },
 });
 
-export const { login, logout, selectImage, resetImage
-} = appSlice.actions;
+export const { login, logout, selectImage, resetImage } = appSlice.actions;
 
 export const selectUser = (state) => state.app.user;
 export const selectSelectedImage = (state) => state.app.selectedImage;
