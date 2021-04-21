@@ -13,6 +13,7 @@
     height: 400px;
     width: 250px;
     padding: 74px;
+    z-index: 3;
 }
 
 .app__logo {
@@ -23,4 +24,6 @@
 .app__bodyBackground {
   background-color: white;
   height: 400px;
+  
 }
+

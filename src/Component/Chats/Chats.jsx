@@ -10,13 +10,15 @@ import { selectUser } from "../../features/appSlice";
 import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
 import { useHistory } from "react-router";
 import { resetCameraImage } from "../../features/cameraSlice";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 function Chats() {
   const [posts, setPosts] = useState([]);
-  const user = useSelector(selectUser);
+  const [user] = useAuthState(auth);
   const dispatch = useDispatch();
   const history = useHistory();
 
+  console.log(user);
   useEffect(() => {
     db.collection("posts")
       .orderBy("timeStamp", "desc")
@@ -35,11 +37,11 @@ function Chats() {
     dispatch(resetCameraImage());
     history.push("/");
   };
-  console.log(user.profilepic);
+  console.log(posts);
   return (
     <div className="chats">
       <div className="chats__header">
-        <Avatar src={user.profilepic} onClick={() => auth.signOut()} className="chats__avatar" />
+        <Avatar src={user?.photoURL} onClick={() => auth.signOut()} className="chats__avatar" />
         
         <div className="chats__search">
           <SearchIcon className="chats__searchIcon" />
@@ -49,8 +51,8 @@ function Chats() {
       </div>
 
       <div className="chats__posts">
-        {posts.map(({ id, data: { profilePic, username, timestamp, imageUrl, read } }) => (
-          <Chat key={id} id={id} username={username} timestamp={timestamp} imageUrl={imageUrl} read={read} profilePic={profilePic} />
+        {posts.map(({ id, data: { profilePic, username, timeStamp, imageUrl, read } }) => (
+          <Chat key={id} id={id} username={username} timeStamp={timeStamp} imageUrl={imageUrl} read={read} profilePic={profilePic} />
         ))}
       </div>
       <RadioButtonUncheckedIcon className="chats__takePicIcon" onClick={takeSnap} fontSize="large" />
